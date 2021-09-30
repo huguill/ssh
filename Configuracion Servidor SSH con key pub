@@ -1,0 +1,32 @@
+CONFIGURACION DEL SERVIDOR SSH PARA ACCESO REMOTO CON CLAVE PUBLICA
+
+1- Instalamos el servicio ssh (servidor) en el servidor remoto. Este ejemplo se basa en la distribución Debian/Ubuntu.
+sudo apt install openssh-server
+
+2- Editamos el archivo de configuracion del servidor ssh
+sudo nano /etc/ssh/sshd_config
+
+3- Cambios sugeridos que debermos realizar en sshd_config
+Port 22 # cambiarlo por ejemplo a 5022
+PermitRootLogin # cambiarlo a "no" para evitar el acceso remoto del usuario root.
+PubkeyAuthentication # cambiarlo a "yes" para permitir el acceso por key publica.
+
+
+4- Una vezx configurado el archivo sshd_config debemos reiniciar el servicio sshd
+systemctl reload sshd
+o
+/etc/init.d/ssh restart
+
+5- Ahora desde el host remoto (nuestra PC) debemos crear las claves (publica y privada) que nos permitiran acceder remotamente al servidor.
+Desde nuestra terminal escribimos
+ssh-keygen -t rsa -b 4096
+Una vez generadas las claves debemos copiar la clave publica en el servidor remoto
+ssh-copy-id usuario@IP_servidor
+
+Donde:
+  usuario -> es el usuario que existe en el servidor remoto
+  IPservidor -> IP del servidor remoto
+ 
+En el proceso de copia nos solicitara la clave del usuario remoto. 
+
+6- Si realizamos los pasos correctamente ya podremos ingresar al servidor remoto sin ingresar clave.
