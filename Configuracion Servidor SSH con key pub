@@ -12,7 +12,7 @@ PermitRootLogin # cambiarlo a "no" para evitar el acceso remoto del usuario root
 PubkeyAuthentication # cambiarlo a "yes" para permitir el acceso por key publica.
 
 
-4- Una vezx configurado el archivo sshd_config debemos reiniciar el servicio sshd
+4- Una vez configurado el archivo sshd_config debemos reiniciar el servicio sshd
 systemctl reload sshd
 o
 /etc/init.d/ssh restart
